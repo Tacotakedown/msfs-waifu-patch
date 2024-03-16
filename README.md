@@ -5,3 +5,5 @@ I know what you are thinking, you want this in your sim... Well do i have good n
 should this be a MSFS package? Yes, but this is easier than figuring all that out...
 
 Is this a massive waste of time? Yes
+
+how to use if you are dumb: `cargo run`
