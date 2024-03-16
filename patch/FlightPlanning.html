@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="./FlightPlanning.css" />
+
+<script type="text/html" id="FlightPlanningTemplate" is-transparent>
+	<div class="TopButtons">
+		<flight-planning-header
+			id="Header"
+			local-grid-row="1"
+		></flight-planning-header>
+	</div>
+
+	<ui-button default-click class="invisible-background hide"></ui-button>
+
+	<div class="searchBox">
+		<search-bar
+			pad-filter-type="exclude"
+			pad-filter-target="UI_WORLD_MARKER"
+			id="Search"
+			input-id="WM_SearchField"
+			select-event="ON_AIRPORT_SELECTED"
+			local-grid="1/2"
+			no-locked-navigation
+			not-pad-interactive
+		></search-bar>
+	</div>
+
+	<div class="CenterContainer">
+		<airport-panels
+			id="AirportPanels"
+			class="hide"
+			local-grid="1-2/2"
+		></airport-panels>
+		<location-infos
+			id="LocationInfos"
+			class="hide"
+			local-grid="3/2"
+		></location-infos>
+		<worldmap-legend
+			id="WorldmapLegend"
+			class="hide"
+			local-grid="3/2"
+		></worldmap-legend>
+	</div>
+
+	<div id="FlyButtonWrapper">
+		<image-button
+			id="Resume"
+			title="@fs-base-onboarding,TT:MENU.RESUME"
+			eventOnValidate="RESUME_SELECTED_FLIGHT"
+			class="hide bigButton"
+			data-url="/icons/Arrows_buttonRIGHT.svg"
+			local-grid="3/3-4"
+		></image-button>
+		<image-button
+			id="Fly"
+			title="TT:MENU.LAUNCH_FLIGHT"
+			class="bigButton button-yellow"
+			eventOnValidate="LAUNCH_FLIGHT"
+			data-url="https://cdn2.steamgriddb.com/icon/ffbab8235ddc5c0290ecd6ceccc0a61a.png"
+			local-grid="3/3-4"
+		></image-button>
+	</div>
+
+	<div class="Activity">
+		<div class="activity-right-column">
+			<flight-legs-list
+				id="LegsList"
+				class="hide"
+				local-grid="3/2"
+			></flight-legs-list>
+			<flight-leg-info
+				id="LegInfo"
+				class="hide"
+				local-grid="3/3-4"
+			></flight-leg-info>
+		</div>
+		<div class="activity-left-column">
+			<activity-briefing
+				id="ActivityBriefing"
+				class="hide"
+				local-grid="1/2-3"
+			></activity-briefing>
+			<activity-leaderboard
+				id="ActivityLeaderboard"
+				class="hide"
+				local-grid="1/4"
+			></activity-leaderboard>
+		</div>
+	</div>
+	<div id="ActivityImagesContainer" class="hide">
+		<image-list
+			id="ActivityImages"
+			class="hide"
+			local-grid="2/3"
+		></image-list>
+	</div>
+
+	<div id="Center" class="hide">
+		<aircraft-panels
+			id="AircraftPanels"
+			class="CenterPanel hide"
+		></aircraft-panels>
+		<weather-panels
+			id="WeatherPanels"
+			class="CenterPanel hide"
+		></weather-panels>
+		<filters-panels
+			id="FiltersPanels"
+			class="CenterPanel hide"
+		></filters-panels>
+	</div>
+
+	<flightplan-panels
+		id="FlightPlanPanels"
+		class="CenterPanel hide"
+	></flightplan-panels>
+
+	<div class="Bottom">
+		<div class="container">
+			<flight-time-slider
+				id="FlightTimeSlider"
+				local-grid-column="1"
+				local-grid-row="3"
+			></flight-time-slider>
+			<worldmap-scale id="Scale"></worldmap-scale>
+		</div>
+		<select-presets id="Selectpreset"></select-presets>
+		<map-market-item-list
+			class="hide"
+			id="MarketItems"
+		></map-market-item-list>
+	</div>
+</script>
+
+<script type="text/javascript" src="./FlightPlanning.js"></script>

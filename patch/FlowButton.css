@@ -1,0 +1,215 @@
+/** This mixin makes a single line element fit exactly on the Roboto font for easier integration. */
+/**
+ * Forces z-index above other siblings during a focused parent.
+*/
+flow-button {
+	--bgc: var(--enabledBackGroundColor);
+	--hoverbgc: var(--enabledHoverBackGroundColor);
+	--tc: var(--enabledColor);
+	--borderHeight: calc(var(--screenHeight) * (16px / 2160));
+	--positionTextBottom: calc(var(--screenHeight) * (28px / 2160));
+	--positionIconBottom: calc(var(--screenHeight) * (24px / 2160));
+	display: flex;
+	height: var(--contentHeight);
+	--borderHeight: calc(var(--screenHeight) * (16px / 2160));
+	--hoverBorderHeight: 100%;
+	min-width: calc(var(--unscaledScreenHeight) * (502px / 2160));
+	width: max-content;
+	flex: 0 1 auto;
+	position: relative;
+	align-items: flex-start;
+	transition: max-width 0.3s cubic-bezier(0, 1, 0, 1);
+	border-radius: 10px !important;
+	overflow: hidden !important;
+}
+flow-button:before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: calc(100% + calc(var(--screenHeight) * (12px / 1080)));
+	margin-top: calc(var(--screenHeight) * (-6px / 1080));
+}
+flow-button:active {
+	--bgc: var(--activeBackGroundColor);
+	--tc: var(--activeColor);
+
+	border-radius: 20px !important;
+}
+flow-button.disabled,
+flow-button.locked {
+	opacity: 0.3;
+	pointer-events: none;
+}
+flow-button.Focused {
+	--bgc: var(--hoverbgc);
+	--tc: var(--enabledHoverColor);
+	--borderHeight: var(--hoverBorderHeight);
+	border-radius: 10px !important;
+	overflow: hidden !important;
+}
+flow-button.Focused .BackToHome {
+	--iconColor: var(--primaryColor);
+}
+flow-button.Focused.activeLoading
+	.loading-overlay__content
+	icon-stack
+	icon-element:nth-child(4n + 1) {
+	--iconColor: var(--primaryColor);
+}
+flow-button.selected:not(.minimized) {
+	--bgc: var(--selectedBackgroundColor);
+	--tc: var(--selectedColor);
+	--borderHeight: 100%;
+	border-radius: 10px !important;
+	overflow: hidden !important;
+}
+flow-button.selected:not(.minimized) .BackToHome {
+	--iconColor: var(--contrastedTextColor);
+}
+flow-button.selected:not(.minimized).activeLoading
+	.loading-overlay__content
+	icon-stack
+	icon-element:nth-child(4n + 1) {
+	--iconColor: var(--selectedColor);
+}
+flow-button.clicked:not(.disabled) {
+	--bgc: var(--activeBackgroundColor);
+	--tc: var(--activeColor);
+}
+flow-button.clicked:not(.disabled) .BackToHome {
+	--iconColor: var(--activeColor);
+}
+flow-button.minimized {
+	transition: min-width 0.55s cubic-bezier(0.05, 0.85, 0.2, 1);
+	max-width: calc(var(--screenHeight) * (83px / 2160));
+	min-width: calc(var(--screenHeight) * (83px / 2160));
+}
+flow-button.minimized .title {
+	display: none;
+}
+flow-button .border {
+	background-color: var(--bgc);
+	height: var(--borderHeight);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	right: 0;
+	overflow: hidden;
+	color: var(--contrastedTextColor);
+	transition: height var(--animationTime) var(--animationEffect);
+}
+flow-button .border .border-content {
+	width: 100%;
+	height: var(--contentHeight);
+	display: flex;
+	align-items: flex-start;
+	position: absolute;
+	bottom: 0;
+}
+flow-button .title {
+	color: var(--tc);
+	font-size: var(--fontSizeParagraph);
+	line-height: 1em;
+	font-weight: bold;
+	margin-top: auto;
+	margin-left: var(--baseMargin);
+	margin-right: var(--halfMargin);
+	text-transform: uppercase;
+	margin-bottom: calc(var(--screenHeight) * (12px / 1080));
+	word-break: break-word;
+}
+flow-button.home .BackToHome {
+	display: flex;
+}
+flow-button.home .border .title {
+	margin-left: calc(var(--screenHeight) * (37px / 1080));
+}
+flow-button .BackToHome {
+	display: none;
+	position: relative;
+	z-index: 3;
+	left: calc(var(--screenHeight) * (16px / 2160));
+	flex: 0 0 auto;
+	--bgc: none;
+	pointer-events: none;
+	margin-top: auto;
+	margin-bottom: calc(var(--screenHeight) * (10px / 1080));
+	--width: calc(var(--screenHeight) * (25px / 1080));
+	--height: calc(var(--screenHeight) * (25px / 1080));
+}
+flow-button .flags {
+	display: none;
+}
+flow-button .flags .new {
+	display: none;
+}
+flow-button.newContent {
+	position: relative;
+}
+flow-button.newContent .flags {
+	display: flex;
+	margin-top: auto;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: calc(var(--screenHeight) * (12px / 1080));
+}
+flow-button.newContent .flags > div:not(:last-of-type) {
+	margin-right: var(--baseMargin);
+}
+flow-button.newContent .flags .new {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(var(--screenHeight) * (18px / 1080));
+	height: calc(var(--screenHeight) * (18px / 1080));
+	color: var(--contrastedTextColor);
+	background: var(--accentColor);
+	border-radius: 100%;
+	text-transform: uppercase;
+}
+flow-button.newContent .flags .new span {
+	text-align: center;
+	font-weight: bold;
+	font-size: calc(var(--screenHeight) * (16px / 1080));
+}
+flow-button.activeLoading {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	align-content: center;
+}
+flow-button.activeLoading .border {
+	padding-left: calc(var(--baseMargin) * 2 + var(--halfMargin));
+}
+flow-button.activeLoading .title {
+	margin-left: 0;
+}
+flow-button.activeLoading .loading-overlay {
+	display: flex;
+	position: relative;
+	align-items: flex-end;
+	top: auto;
+	left: auto;
+	bottom: calc(var(--screenHeight) * (6px / 1080));
+	right: auto;
+	background: none;
+	width: auto;
+	height: 100%;
+	margin: 0;
+}
+flow-button.activeLoading .loading-overlay__content {
+	background: none;
+}
+flow-button.activeLoading .loading-overlay__content icon-stack {
+	--width: calc(var(--screenHeight) * (30px / 1080));
+	--height: calc(var(--screenHeight) * (30px / 1080));
+	margin-right: 0;
+	background: none;
+}
+flow-button.activeLoading .loading-overlay__content l10n-label {
+	display: none;
+}
+
+/*# sourceMappingURL=FlowButton.css.map */

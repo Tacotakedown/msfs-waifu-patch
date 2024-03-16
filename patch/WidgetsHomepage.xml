@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SimBase.Document Type="Widget" version="1,0">
+	<Filename>WidgetHome.XML</Filename>
+	<Title>HOME</Title>
+
+	<Widgets.WidgetPage>
+		<PageSize>12;2</PageSize>
+
+		
+		
+		<WidgetDefinition>
+			<PosAndSize>1;1;12;12</PosAndSize>
+			<ContentPage>
+				<ContentType>HTML</ContentType>
+				<Title>TT:MENU.WIDGET_WORLDMAP</Title>
+				<Image>https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/cute-hentai-stewardess-in-plane-ultra-hd-hi-res.jpg</Image>
+				<Descr>TT:MENU.WIDGET_WORLDMAP_DESC</Descr>
+				<ButtonEvent>GOTO_WORLDMAP_NEW</ButtonEvent>
+			</ContentPage>
+			<GameContent type="AIRPORT" />
+			<GameContent type="POI" />
+		</WidgetDefinition>
+
+		
+		
+		<!-- <WidgetDefinition>
+			<PosAndSize>2;1;1;1</PosAndSize>
+			<ContentSource>NEWS</ContentSource>
+			<ContentPage>
+				<Title>TT:MENU.WIDGET_NEWS</Title>
+				<Descr>TT:MENU.WIDGET_NEWS_DESC</Descr>
+				<Image>vfs://widgets/images/ContactingSupport.png</Image>
+				<ContentType>HTML</ContentType>
+				<ContentDisplay>EXPANDABLE</ContentDisplay>
+				<ContentComponent>          	
+          			<UIComponent id="NewsTextImage">
+						<DataStr>{
+							"Title":"",
+							"Description":"TT:NEWS.SUPPORT_DESC",
+							"Images":[
+								"coui://html_ui/vfs/html_ui/News/ContactNews.jpg"
+							],
+							"Texts":[],
+							"Links":[],
+							"LinkTitles":[]
+						}</DataStr>
+					</UIComponent>
+				</ContentComponent>
+			</ContentPage>
+		</WidgetDefinition> -->
+
+	
+
+</SimBase.Document>

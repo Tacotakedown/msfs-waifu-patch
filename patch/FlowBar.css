@@ -1,0 +1,226 @@
+/** This mixin makes a single line element fit exactly on the Roboto font for easier integration. */
+/**
+ * Forces z-index above other siblings during a focused parent.
+*/
+#WidgetsPages {
+	background-color: red;
+}
+
+body#FlowBarPage.greyed-notif:after {
+	content: '';
+	transition: opacity 0s;
+	display: block;
+	position: fixed;
+	left: 0;
+	opacity: 1;
+	width: 100%;
+	bottom: 0;
+	top: auto;
+	height: calc(var(--inputBarHeight));
+	background-color: var(--backgroundColorOverlay);
+	z-index: 1000 !important;
+}
+body#FlowBarPage.greyed-notif:before {
+	content: '';
+	transition: opacity 0s;
+	display: block;
+	position: fixed;
+	left: 0;
+	opacity: 1;
+	width: 100%;
+	top: 0;
+	height: calc(var(--flowBarHeight));
+	background-color: var(--backgroundColorOverlay);
+	z-index: 1000 !important;
+}
+body#FlowBarPage.greyed-notif flow-bar #WidgetsPages:after {
+	content: '';
+	display: block;
+	position: fixed;
+	left: 0;
+	opacity: 1;
+	width: 100%;
+	background-color: var(--backgroundColorOverlay);
+	top: var(--flowBarHeight);
+	height: calc(100vh - var(--flowBarHeight) - var(--inputBarHeight));
+}
+
+flow-bar.fullSizeHomeButton #NavBarHistory {
+	left: calc(var(--screenHeight) * (522px / 2160)) !important;
+}
+flow-bar #Flowbar {
+	--gamerTagMaxWidth: calc(var(--screenHeight) * (1140px / 2160));
+	--contentHeight: calc(
+		var(--flowBarHeight) - calc(var(--screenHeight) * (12px / 1080))
+	);
+	position: absolute;
+	display: flex;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--flowBarHeight);
+	background: var(--backgroundColorContrastedPanel);
+	padding: var(--halfMargin) 0;
+	overflow: visible;
+}
+flow-bar #Flowbar .flow-bar-wrapper {
+	background-color: var(--backgroundColorPanel);
+	flex: 1 1 auto;
+}
+flow-bar #Flowbar #NavBar {
+	width: auto;
+	height: 100%;
+	position: relative;
+}
+flow-bar #Flowbar .NavButton {
+	display: block;
+	position: absolute;
+	height: 1em;
+	width: 1em;
+	top: calc(50% + var(--halfMargin));
+	transform: translateY(-50%);
+}
+flow-bar #Flowbar .NavButton device-button {
+	color: white;
+}
+flow-bar #Flowbar #IconMoveLeft {
+	right: calc(100% + var(--baseMargin));
+}
+flow-bar #Flowbar #IconMoveRight {
+	left: calc(var(--NavBarWidth) - var(--halfMargin) + var(--baseMargin));
+}
+flow-bar #Flowbar #IconCommunity {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	left: calc(100% + var(--baseMargin));
+}
+flow-bar #Flowbar.single-menu .NavBarAndGamerCard #NavBarHistory {
+	left: calc(var(--screenHeight) * (526px / 2160));
+}
+flow-bar #Flowbar .NavBarAndGamerCard {
+	position: relative;
+	height: var(--contentHeight);
+	width: var(--fullPageWidth);
+	margin: auto;
+	display: flex;
+}
+flow-bar #Flowbar .NavBarAndGamerCard #NavBarHistory {
+	position: relative;
+	left: calc(var(--screenHeight) * (106px / 2160));
+	right: var(--gamerTagMaxWidth);
+	bottom: 0;
+	height: var(--contentHeight);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	overflow: hidden;
+}
+flow-bar #Flowbar .NavBarAndGamerCard #NavBarHistory #HistoryContainer {
+	width: 100%;
+	height: var(--contentHeight);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	transition: transform var(--animationTime) var(--animationEffect);
+}
+flow-bar #Flowbar .NavBarAndGamerCard #NavBarHistory #HistoryContainer.hide {
+	transform: translateY(calc(var(--contentHeight) * -1));
+	transition: unset;
+}
+flow-bar
+	#Flowbar
+	.NavBarAndGamerCard
+	#NavBarHistory
+	#HistoryContainer
+	flow-button
+	+ flow-button {
+	margin-left: calc(var(--screenHeight) * (24px / 2160));
+}
+flow-bar #Flowbar .NavBarAndGamerCard #NavBarContainer {
+	position: absolute;
+	left: 0;
+	width: auto;
+	top: 0;
+	height: var(--contentHeight);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+	--bgc: var(--enabledBackGroundColor);
+	--tc: var(--enabledColor);
+	--borderHeight: calc(var(--screenHeight) * (32px / 2160));
+	transition: transform var(--animationTime) var(--animationEffect);
+}
+flow-bar #Flowbar .NavBarAndGamerCard #NavBarContainer.hide {
+	transform: translateY(calc(var(--contentHeight) * -1));
+	transition: unset;
+}
+flow-bar
+	#Flowbar
+	.NavBarAndGamerCard
+	#NavBarContainer
+	flow-button
+	+ flow-button {
+	margin-left: calc(var(--screenHeight) * (24px / 2160));
+}
+flow-bar #Flowbar .NavBarAndGamerCard gamer-tag {
+	position: absolute;
+	right: 0;
+	top: 0;
+	max-width: var(--gamerTagMaxWidth);
+}
+flow-bar #Flowbar .NavBarAndGamerCard community-panel {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-left: auto;
+}
+flow-bar #WidgetsPages {
+	transform: translateX(calc(var(--currentIndex) * var(--fullPageWidth) * -1));
+	transition: transform 0.5s cubic-bezier(1, -0.07, 0.01, 0.97);
+}
+flow-bar #WidgetsPages widget-container {
+	display: block;
+	transform: translateX(calc(var(--index) * var(--fullPageWidth)));
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+flow-bar #WidgetsPages widget-container.disabled {
+	pointer-events: none;
+}
+
+#WidgetsPages {
+	border-radius: 30% !important;
+}
+
+#FlowBarPage {
+	/* background-color: black !important; */
+}
+
+.WidgetButtonsLayout {
+	border-radius: 30% !important;
+}
+#Flowbar {
+	border-bottom: 2px solid white !important;
+	padding: 0px !important;
+	box-shadow: rgb(255, 255, 255) 0px 0px 20px;
+}
+.input-bar {
+	border-top: 2px solid white !important;
+	padding: 0px !important;
+}
+.single-line {
+	border-top: 2px solid white !important;
+	padding: 0px !important;
+}
+widget-container {
+	background-color: black !important;
+}
+
+/*# sourceMappingURL=FlowBar.css.map */

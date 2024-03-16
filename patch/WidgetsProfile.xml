@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SimBase.Document Type="Widget" version="1,0">
+	<Filename>WidgetsProfile.XML</Filename>
+	<Title>PROFILE</Title>
+
+	<Widgets.WidgetPage>
+
+		<PageSize>10;8</PageSize>
+
+		
+
+		<WidgetDefinition>
+			<PosAndSize>1;1;5;8</PosAndSize>
+			<ContentPage>
+				<ContentType>HTML</ContentType>
+				<Title>TT:MENU.WIDGET_MY_HANGAR</Title>
+				<Descr/>
+				<Image>https://img-9gag-fun.9cache.com/photo/av5RVeE_460s.jpg</Image>
+				<ButtonEvent>GOTO_HANGAR</ButtonEvent>
+			</ContentPage>
+		</WidgetDefinition>
+
+		<WidgetDefinition>
+			<PosAndSize>6;8;2;1</PosAndSize>
+			<ContentPage>
+				<ContentType>HTML</ContentType>
+				<ContentComponent>
+					<UIComponent id="ContentManager" />
+				</ContentComponent>
+
+				<Title>TT:MENU.WIDGET_CONTENT_MANAGER</Title>
+				<Descr/>
+				<Image>vfs://widgets/images/contentManager_01_2.jpg</Image>
+				<ContentDisplay>EXPANDABLE</ContentDisplay>
+				<DisplayStyle>FULLSCREEN</DisplayStyle>
+			</ContentPage>
+		</WidgetDefinition>
+
+		
+
+
+	</Widgets.WidgetPage>
+
+</SimBase.Document>

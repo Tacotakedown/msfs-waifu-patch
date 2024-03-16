@@ -1,0 +1,453 @@
+/** This mixin makes a single line element fit exactly on the Roboto font for easier integration. */
+/**
+ * Forces z-index above other siblings during a focused parent.
+*/
+:root {
+	--page-margin: var(--pageMargin);
+	--flightBarHeight: calc(var(--screenHeight) * (149px / 1080));
+}
+
+flight-briefing {
+	transition: opacity 0.3s;
+	position: relative;
+	height: 100vh;
+}
+flight-briefing .BriefingImageOverlay {
+	position: absolute;
+	width: calc(var(--unscaledScreenHeight) * (1920px / 1080));
+	height: calc(var(--unscaledScreenHeight) * (1080px / 1080));
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+}
+
+flight-planning,
+flight-briefing {
+	--sideColumn: calc(var(--screenHeight) * (347px / 1080));
+	--unscaledSideColumn: calc(var(--unscaledScreenHeight) * (347px / 1080));
+	display: block;
+}
+flight-planning .TopButtons,
+flight-briefing .TopButtons {
+	position: absolute;
+	top: var(--flowBarHeight);
+	left: 0;
+	right: 0;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--backgroundColorContrastedPanel);
+}
+flight-planning .TopButtons flight-planning-header,
+flight-briefing .TopButtons flight-planning-header {
+	left: 0;
+	right: 0;
+	position: relative;
+	width: 100%;
+}
+flight-planning .invisible-background,
+flight-briefing .invisible-background {
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	opacity: 0;
+}
+flight-planning .invisible-background.hide,
+flight-briefing .invisible-background.hide {
+	display: none;
+}
+flight-planning .searchBox,
+flight-briefing .searchBox {
+	position: absolute;
+	top: calc(var(--screenHeight) * (492px / 2160));
+	left: 0;
+	display: block;
+	margin: 0 auto;
+	right: 0;
+	width: var(--fullPageWidth);
+	transition: top 0.3s cubic-bezier(1, 0.9, 0.2, 1);
+	z-index: 1;
+}
+flight-planning .searchBox.posMin,
+flight-briefing .searchBox.posMin {
+	top: var(--flowBarHeight);
+	--transform: rotate(90deg);
+}
+flight-planning .searchBox.posMax,
+flight-briefing .searchBox.posMax {
+	top: calc(var(--screenHeight) * (600px / 2160));
+}
+flight-planning #Search,
+flight-briefing #Search {
+	margin-top: calc(var(--screenHeight) * (24px / 2160));
+	display: block;
+	position: absolute;
+	top: 0;
+	width: var(--unscaledSideColumn);
+}
+flight-planning #Search .SearchButton,
+flight-briefing #Search .SearchButton {
+	--height: calc(var(--screenHeight) * (60px / 2160));
+}
+flight-planning #Center,
+flight-briefing #Center {
+	position: absolute;
+	top: calc(var(--flowBarHeight) + var(--flightBarHeight));
+	bottom: calc(
+		var(--inputBarHeight) + calc(var(--screenHeight) * (36px / 1080))
+	);
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index: 101;
+}
+flight-planning #Center.open .CenterPanel:not(.hide),
+flight-briefing #Center.open .CenterPanel:not(.hide) {
+	outline: var(--halfMargin) solid white;
+	background-color: var(--backgroundColorContrastedPanel);
+}
+flight-planning #Center .CenterPanel,
+flight-briefing #Center .CenterPanel {
+	z-index: 20;
+	width: var(--fullPageWidth);
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0 auto;
+	top: 0;
+	padding: var(--halfMargin);
+}
+flight-planning #Center .CenterPanel#FiltersPanels,
+flight-briefing #Center .CenterPanel#FiltersPanels {
+	margin: 0;
+	top: unset;
+	left: 50%;
+	transition: transform ease-in-out 0.3s;
+	bottom: 0;
+	transform: translateX(-50%);
+	width: calc(var(--unscaledScreenHeight) * (800px / 1080));
+	height: calc(var(--unscaledScreenHeight) * (330px / 1080));
+	background-color: var(--backgroundColorContrastedPanel);
+	padding: var(--quartMargin);
+}
+flight-planning #Center .CenterPanel#WorldmapLegend,
+flight-briefing #Center .CenterPanel#WorldmapLegend {
+	width: auto;
+}
+flight-planning #FlightPlanPanels,
+flight-briefing #FlightPlanPanels {
+	position: absolute;
+	width: calc(var(--screenHeight) * (1665px / 1080));
+	height: calc(var(--screenHeight) * (633px / 1080));
+	top: calc(var(--screenHeight) * (325px / 1080));
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index: 1;
+	outline: var(--halfMargin) solid white;
+	background-color: var(--backgroundColorContrastedPanel);
+}
+flight-planning #SubHeader,
+flight-briefing #SubHeader {
+	width: calc(var(--screenHeight) * (3326px / 2160));
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: calc(var(--screenHeight) * (498px / 2160));
+	margin: auto;
+	height: auto;
+	z-index: 20;
+	/*#Search {
+      display:block;
+      position:absolute;
+      top:0;
+      left: get-vh(768px);
+      right: get-vh(768px);
+      --height:72px;
+      width:auto;
+  }*/
+}
+flight-planning #SubHeader #FuelRange,
+flight-briefing #SubHeader #FuelRange {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(var(--screenHeight) * (744px / 2160));
+	--height: 72px;
+}
+flight-planning .CenterContainer,
+flight-briefing .CenterContainer {
+	--centerContainerHeight: calc(var(--unscaledScreenHeight) * (620px / 1080));
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: var(--fullPageWidth);
+	height: var(--centerContainerHeight);
+	top: calc(var(--screenHeight) * (267px / 1080));
+}
+flight-planning .CenterContainer.posMax,
+flight-briefing .CenterContainer.posMax {
+	--centerContainerHeight: calc(var(--unscaledScreenHeight) * (566px / 1080));
+	top: calc(var(--screenHeight) * (311px / 1080));
+}
+flight-planning .Bottom,
+flight-briefing .Bottom {
+	position: absolute;
+	bottom: var(--inputBarHeight);
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 100%;
+}
+flight-planning .Bottom .container,
+flight-briefing .Bottom .container {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	max-width: var(--fullPageWidth);
+	margin: 0 auto;
+	height: 100vh;
+}
+flight-planning .Bottom .container #FlightTimeSlider,
+flight-briefing .Bottom .container #FlightTimeSlider {
+	position: absolute;
+	bottom: calc(var(--screenHeight) * (12px / 1080));
+	left: calc(var(--screenHeight) * (40px / 1080));
+	width: var(--unscaledSideColumn);
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+flight-planning .Bottom .container #FlightTimeSlider .backPanel,
+flight-briefing .Bottom .container #FlightTimeSlider .backPanel {
+	background-color: unset;
+}
+flight-planning .Activity,
+flight-briefing .Activity {
+	position: absolute;
+	top: calc(var(--screenHeight) * (288px / 1080));
+	display: flex;
+	width: var(--fullPageWidth);
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	flex-direction: column;
+	justify-content: space-between;
+	height: calc(var(--screenHeight) * (652px / 1080));
+	z-index: 100;
+	pointer-events: none;
+}
+flight-planning .Activity .activity-right-column,
+flight-planning .Activity .activity-left-column,
+flight-briefing .Activity .activity-right-column,
+flight-briefing .Activity .activity-left-column {
+	position: absolute;
+	top: 0;
+	display: flex;
+	height: 100%;
+	min-height: 0;
+	flex-direction: column;
+	align-items: stretch;
+	width: calc(var(--unscaledScreenHeight) * (350px / 1080));
+	pointer-events: all;
+}
+flight-planning .Activity .activity-right-column.reversed,
+flight-planning .Activity .activity-left-column.reversed,
+flight-briefing .Activity .activity-right-column.reversed,
+flight-briefing .Activity .activity-left-column.reversed {
+	flex-direction: column-reverse;
+}
+flight-planning .Activity .activity-right-column,
+flight-briefing .Activity .activity-right-column {
+	right: 0;
+}
+flight-planning .Activity .activity-left-column,
+flight-briefing .Activity .activity-left-column {
+	left: 0;
+}
+flight-planning .Activity.hideByPanel,
+flight-briefing .Activity.hideByPanel {
+	display: none !important;
+}
+flight-planning .Activity #ActivityBriefing,
+flight-briefing .Activity #ActivityBriefing {
+	min-height: calc(var(--unscaledScreenHeight) * (794px / 2160));
+	flex: 1 1 auto;
+	z-index: 2;
+}
+flight-planning .Activity #ActivityLeaderboard,
+flight-briefing .Activity #ActivityLeaderboard {
+	margin-top: var(--baseMargin);
+	flex: 0 0 calc(var(--screenHeight) * (242px / 1080));
+	z-index: 2;
+}
+flight-planning .Activity #GhostPanel,
+flight-briefing .Activity #GhostPanel {
+	margin-bottom: calc(var(--screenHeight) * (40px / 1080));
+}
+flight-planning #LegsList,
+flight-briefing #LegsList {
+	flex: 1 1 calc(var(--unscaledScreenHeight) * (336px / 1080));
+	margin-bottom: var(--baseMargin);
+}
+flight-planning #LegInfo,
+flight-briefing #LegInfo {
+	flex: 0 0 auto;
+}
+flight-planning #AirportPanels,
+flight-briefing #AirportPanels {
+	position: absolute;
+	left: 0;
+	right: calc(var(--unscaledScreenHeight) * (720px / 2160));
+	width: auto;
+	top: 0;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	z-index: 2;
+}
+flight-planning #LocationInfos,
+flight-briefing #LocationInfos {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: var(--unscaledSideColumn);
+	max-height: 100%;
+	z-index: 1;
+	align-self: flex-end;
+	padding: var(--quartMargin);
+	background-color: var(--backgroundColorContrastedPanel);
+}
+flight-planning #LocationInfos airport-location-infos,
+flight-briefing #LocationInfos airport-location-infos {
+	height: calc(var(--centerContainerHeight) - var(--halfMargin));
+}
+flight-planning #WorldmapLegend,
+flight-briefing #WorldmapLegend {
+	position: absolute;
+	right: calc(var(--unscaledScreenHeight) * (360px / 1080));
+	height: var(--centerContainerHeight);
+	width: calc(var(--unscaledScreenHeight) * (560px / 2160));
+	z-index: 101;
+}
+flight-planning #LocationInfos.hide ~ #WorldmapLegend:not(.pushed-left),
+flight-briefing #LocationInfos.hide ~ #WorldmapLegend:not(.pushed-left) {
+	right: 0;
+	width: var(--unscaledSideColumn);
+}
+flight-planning #FlyButtonWrapper,
+flight-briefing #FlyButtonWrapper {
+	z-index: 3;
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin: auto;
+	width: var(--fullPageWidth);
+	bottom: calc(var(--inputBarHeight) + var(--baseMargin));
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	pointer-events: none;
+}
+flight-planning #FlyButtonWrapper > *,
+flight-briefing #FlyButtonWrapper > * {
+	pointer-events: auto;
+}
+flight-planning #Fly,
+flight-briefing #Fly {
+	margin-left: calc(var(--screenHeight) * (24px / 2160));
+	width: var(--unscaledSideColumn);
+}
+flight-planning #Fly.hideByReno,
+flight-briefing #Fly.hideByReno {
+	display: none !important;
+}
+flight-planning #FlightPlan,
+flight-briefing #FlightPlan {
+	z-index: 1;
+	position: absolute;
+	right: 25vw;
+	bottom: 10vh;
+}
+flight-planning #ActivityImagesContainer,
+flight-briefing #ActivityImagesContainer {
+	z-index: 102;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	position: absolute;
+	bottom: calc(
+		var(--inputBarHeight) + calc(var(--screenHeight) * (62px / 1080))
+	);
+	height: calc(var(--screenHeight) * (106px / 1080));
+	--width: calc(var(--screenHeight) * (843px / 1080));
+	width: var(--width);
+	left: calc((100vw - var(--width)) * 0.5);
+}
+flight-planning #ActivityImages,
+flight-briefing #ActivityImages {
+	z-index: 2;
+	width: auto;
+	max-width: 100%;
+}
+flight-planning #Scale,
+flight-briefing #Scale {
+	position: absolute;
+	right: 0;
+	bottom: calc(var(--baseMargin) + calc(var(--screenHeight) * (70px / 1080)));
+}
+flight-planning .Footer,
+flight-briefing .Footer {
+	z-index: 0;
+	position: absolute;
+	bottom: calc(var(--screenHeight) * (162px / 2160));
+	height: calc(var(--screenHeight) * (324px / 2160));
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+flight-planning #Selectpreset,
+flight-briefing #Selectpreset {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	overflow: hidden;
+}
+flight-planning .hideBypreset,
+flight-briefing .hideBypreset {
+	opacity: 0 !important;
+	pointer-events: none;
+	transition: opacity ease-out 0.1s;
+	transition-delay: 0s !important;
+}
+flight-planning .CanBeHideBypreset,
+flight-briefing .CanBeHideBypreset {
+	opacity: inherit;
+	transition: opacity ease-out 0.2s;
+	transition-delay: 0.1s;
+}
+flight-planning #RaceLobbyPanel,
+flight-briefing #RaceLobbyPanel {
+	position: absolute;
+	width: calc(var(--screenHeight) * (347px / 1080));
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+flight-planning #MarketItems,
+flight-briefing #MarketItems {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 0;
+	width: 50%;
+}
+
+/*# sourceMappingURL=FlightPlanning.css.map */
