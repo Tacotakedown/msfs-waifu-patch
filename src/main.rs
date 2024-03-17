@@ -1,45 +1,15 @@
+use crate::copy_and_replace::copy_and_replace_file;
+use crate::paths::Paths;
+
 use std::env;
 use std::fs;
-use std::io::{self, Error, ErrorKind};
-use std::path::Path;
+use std::io;
 use std::path::PathBuf;
-use std::time::SystemTime;
 
-fn copy_and_replace_file(source_path: &str, destination_path: &str) -> io::Result<()> {
-    let source_file = Path::new(source_path);
-
-    if !source_file.exists() {
-        return Err(Error::new(ErrorKind::NotFound, "Source file not found"));
-    }
-
-    let destination_file = Path::new(destination_path);
-    if destination_file.exists() {
-        let timestamp = SystemTime::now()
-            .duration_since(SystemTime::UNIX_EPOCH)
-            .unwrap()
-            .as_secs();
-        let backup_path = format!("{}.backup_{}", destination_path, timestamp);
-        fs::copy(destination_path, &backup_path)?;
-    }
-
-    fs::copy(source_path, destination_path)?;
-
-    Ok(())
-}
+mod copy_and_replace;
+mod paths;
 
 fn main() {
-    const WIDGET_MENU_BUTTON: &str =
-        "\\Packages\\fs-base-ui\\html_ui\\Templates\\WidgetMenuButton\\WidgetMenuButton.css"; // steam (exe)
-    const WIDGETS_HOMEPAGE: &str = "\\fs-base-ui-widgets\\Widgets\\WidgetsHomepage.xml"; // appdata
-    const WIDGETS_PROFILE: &str = "\\fs-base\\widgets\\WidgetsProfile.xml"; // appdata
-    const FLIGHT_PLANNING: &str =
-        "\\fs-base-ui-pages\\html_ui\\Pages\\FlightPlanning\\FlightPlanning.css"; // appdata
-    const FLIGHT_PLANNING_HTML: &str =
-        "\\fs-base-ui-pages\\html_ui\\Pages\\lightPlanning\\FlightPlanning.html"; // appdata
-    const FLOW_BUTTON: &str =
-        "\\Packages\\fs-base-ui\\html_ui\\Templates\\FlowButton\\FlowButton.css"; // steam (exe install)
-    const FLOW_BAR: &str = "\\Packages\\fs-base-onboarding\\html_ui\\ages\\FlowBar\\FlowBar.css"; // steam (exe)
-
     let mut official_input = String::new();
     let mut exe_input = String::new();
 
@@ -115,13 +85,13 @@ fn main() {
         let file_name = file.file_name().unwrap().to_string_lossy();
         let source_path = file.to_str().unwrap();
         let destination_path = match file_name.to_lowercase().as_str() {
-            "flightplanning.css" => format!("{}{}", &official_input, FLIGHT_PLANNING),
-            "flightplanning.html" => format!("{}{}", &official_input, FLIGHT_PLANNING_HTML),
-            "flowbar.css" => format!("{}{}", &exe_input, FLOW_BAR),
-            "flowbutton.css" => format!("{}{}", &exe_input, FLOW_BUTTON),
-            "widgetmenubutton.css" => format!("{}{}", &exe_input, WIDGET_MENU_BUTTON),
-            "widgetshomepage.xml" => format!("{}{}", &official_input, WIDGETS_HOMEPAGE),
-            "widgetsprofile.xml" => format!("{}{}", &official_input, WIDGETS_PROFILE),
+            "flightplanning.css" => format!("{}{}", &official_input, Paths::FLIGHT_PLANNING),
+            "flightplanning.html" => format!("{}{}", &official_input, Paths::FLIGHT_PLANNING_HTML),
+            "flowbar.css" => format!("{}{}", &exe_input, Paths::FLOW_BAR),
+            "flowbutton.css" => format!("{}{}", &exe_input, Paths::FLOW_BUTTON),
+            "widgetmenubutton.css" => format!("{}{}", &exe_input, Paths::WIDGET_MENU_BUTTON),
+            "widgetshomepage.xml" => format!("{}{}", &official_input, Paths::WIDGETS_HOMEPAGE),
+            "widgetsprofile.xml" => format!("{}{}", &official_input, Paths::WIDGETS_PROFILE),
             _ => {
                 eprintln!("Unknown file {}", file_name);
                 continue;
