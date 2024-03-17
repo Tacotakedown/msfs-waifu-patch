@@ -7,3 +7,5 @@ should this be a MSFS package? Yes, but this is easier than figuring all that ou
 Is this a massive waste of time? Yes
 
 how to use if you are dumb: `cargo run`
+
+why rust and not python? why dont you ask Joe Biden
